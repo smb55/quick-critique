@@ -1,2 +1,0 @@
-gmaps_api_key = "AIzaSyAf1sru-CH6xk3T0eR1OwPjByi4xm6Qjkg"
-serp_api_key = "24aaa520e229d9d24ab266e6f6d235a4320bc800ae67f28c99fd25f659cc6d1c"
