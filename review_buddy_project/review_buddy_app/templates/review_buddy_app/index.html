@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurant Review Aggregator</title>
+</head>
+<body>
+    <h1>Enter Restaurant and City</h1>
+    <form method="post">
+        <!-- Include the CSRF token for security -->
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

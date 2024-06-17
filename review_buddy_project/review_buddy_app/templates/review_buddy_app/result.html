@@ -1,0 +1,30 @@
+<head>
+    <title>Review Summary</title>
+</head>
+<body>
+    <h1>Review Summary</h1>
+    <!-- Display the summary text -->
+    <p>{{ summary }}</p>
+    
+    <!-- Display place details -->
+    <h2>Place Details</h2>
+    <p><strong>Name:</strong> {{ place_details.displayName }}</p>
+    <p><strong>Rating:</strong> {{ place_details.rating }}</p>
+    <p><strong>User Rating Count:</strong> {{ place_details.userRatingCount }}</p>
+
+    <!-- Display reviews -->
+    <h2>Reviews</h2>
+    {% for review in reviews %}
+        <div>
+            <p><strong>Date:</strong> {{ review.iso_date }}</p>
+            <p><strong>Author:</strong> {{ review.user.name }}</p>
+            <p><strong>Rating:</strong> {{ review.rating }}</p>
+            <p><strong>Review:</strong> {{ review.snippet }}</p>
+            <hr>
+        </div>
+    {% endfor %}
+    
+    <!-- Link to go back to the form -->
+    <a href="{% url 'index' %}">Back to form</a>
+</body>
+</html>
