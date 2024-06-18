@@ -1,5 +1,7 @@
 venv/
+testing/
 __pycache__/
 *.pyc
 db.sqlite3
 review_buddy_project/review_buddy_app/creds.py
+review_buddy_project/review_buddy_app/gpt_test.py

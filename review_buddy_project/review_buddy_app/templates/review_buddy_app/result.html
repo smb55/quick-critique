@@ -12,17 +12,11 @@
     <p><strong>Rating:</strong> {{ place_details.rating }}</p>
     <p><strong>User Rating Count:</strong> {{ place_details.userRatingCount }}</p>
 
-    <!-- Display reviews -->
-    <h2>Reviews</h2>
-    {% for review in reviews %}
+    <!-- Display review summary -->
+    <h2>Review Summary</h2>
         <div>
-            <p><strong>Date:</strong> {{ review.iso_date }}</p>
-            <p><strong>Author:</strong> {{ review.user.name }}</p>
-            <p><strong>Rating:</strong> {{ review.rating }}</p>
-            <p><strong>Review:</strong> {{ review.snippet }}</p>
-            <hr>
+            <p>{{ review_summary }}</p>
         </div>
-    {% endfor %}
     
     <!-- Link to go back to the form -->
     <a href="{% url 'index' %}">Back to form</a>

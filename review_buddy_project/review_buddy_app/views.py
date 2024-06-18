@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import ReviewForm
 from .scraping import get_reviews
+from .analysis import summarise_reviews
 
 def index(request):
     if request.method == 'POST':
@@ -9,19 +10,18 @@ def index(request):
             restaurant_name = form.cleaned_data['restaurant_name']
             city_name = form.cleaned_data['city_name']
 
-            
-
             # Get place details and reviews
             place_details, reviews = get_reviews(restaurant_name, city_name)
-            summary = f"Summary for {restaurant_name} in {city_name}"
+            title = f"Summary for {restaurant_name} in {city_name}"
+            
+            # Summarise with AI
+            review_summary = summarise_reviews(reviews)
             
             return render(request, 'review_buddy_app/result.html', {
-                'summary': summary,
+                'title': title,
                 'place_details': place_details,
-                'reviews': reviews
+                'review_summary': review_summary
             })
-
-            # Placeholder for AI processing logic
 
     else:
         form = ReviewForm()

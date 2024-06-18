@@ -32,6 +32,22 @@ def extract_place_details(response_data):
         return place_details, place_id
     return None, None
 
+def extract_relevant_fields(reviews):
+    concise_reviews = []
+
+    for review in reviews:
+        review_info = {
+            'rating': review.get('rating'),
+            'iso_date': review.get('iso_date'),
+            'local_guide': review['user'].get('local_guide', False),
+            'reviews': review['user'].get('reviews', 0),
+            'snippet': review.get('snippet'),
+            'details': review.get('details')
+        }
+        concise_reviews.append(review_info)
+
+    return concise_reviews
+
 def get_reviews(restaurant_name, city_name):
     
     places_data = get_google_places_data(gmaps_api_key, restaurant_name, city_name)
@@ -60,5 +76,6 @@ def get_reviews(restaurant_name, city_name):
         #reviews += results2["reviews"]
 
     # add some code here to loop this a few times to get more reviews
-    print(reviews)
-    return place_details, reviews
+    concise_reviews = extract_relevant_fields(reviews)
+    print(json.dumps(concise_reviews, indent=2))
+    return place_details, concise_reviews
