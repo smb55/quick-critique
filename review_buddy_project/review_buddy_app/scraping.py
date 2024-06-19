@@ -27,8 +27,6 @@ def extract_place_details(response_data):
             'userRatingCount': place.get('userRatingCount', ''),
         }
         place_id = response_data['places'][0]['id']
-        print(place_details)
-        print(place_id)
         return place_details, place_id
     return None, None
 
@@ -64,18 +62,21 @@ def get_reviews(restaurant_name, city_name):
     "sort_by": "newestFirst"
     }
 
-    search1 = serpapi.search(params)
-    results1 = search1.as_dict()
-    reviews = results1["reviews"]
-    
-    # Handle pagination if necessary
-    #if "next_page_token" in results1.get("serpapi_pagination", {}):
-        #params["next_page_token"] = results1["serpapi_pagination"]["next_page_token"]
-        #search2 = serpapi.search(params)
-        #results2 = search2.as_dict()
-        #reviews += results2["reviews"]
-
-    # add some code here to loop this a few times to get more reviews
+    reviews = []
+    # Loop through the first 5 pages
+    for _ in range(5):  
+        search = serpapi.search(params)
+        results = search.as_dict()
+        reviews.extend(results.get("reviews", []))
+        # Check for next page token
+        pagination = results.get("serpapi_pagination", {})
+        next_page_token = pagination.get("next_page_token")
+        if next_page_token:
+            params["next_page_token"] = next_page_token
+        else:
+            # No more pages, break out of the loop
+            break  
+    #print(reviews)
     concise_reviews = extract_relevant_fields(reviews)
-    print(json.dumps(concise_reviews, indent=2))
+    #print(json.dumps(concise_reviews, indent=2))
     return place_details, concise_reviews

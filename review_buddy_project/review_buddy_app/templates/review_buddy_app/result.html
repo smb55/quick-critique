@@ -1,23 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Review Summary</title>
 </head>
 <body>
     <h1>Review Summary</h1>
-    <!-- Display the summary text -->
-    <p>{{ summary }}</p>
     
-    <!-- Display place details -->
+    <!-- Display the place details -->
     <h2>Place Details</h2>
     <p><strong>Name:</strong> {{ place_details.displayName }}</p>
     <p><strong>Rating:</strong> {{ place_details.rating }}</p>
     <p><strong>User Rating Count:</strong> {{ place_details.userRatingCount }}</p>
 
-    <!-- Display review summary -->
-    <h2>Review Summary</h2>
-        <div>
-            <p>{{ review_summary }}</p>
-        </div>
-    
+    <!-- Display the review summary sections -->
+    <h2>Food</h2>
+    <p>{{ review_summary.Food }}</p>
+
+    <h2>Service</h2>
+    <p>{{ review_summary.Service }}</p>
+
+    <h2>Atmosphere</h2>
+    <p>{{ review_summary.Atmosphere }}</p>
+
+    <h2>Price</h2>
+    <p>{{ review_summary.Price }}</p>
+
+    <h2>Trend</h2>
+    <p>{{ review_summary.Trend }}</p>
+
+    <h2>Summary</h2>
+    <p>{{ review_summary.Summary }}</p>
+
     <!-- Link to go back to the form -->
     <a href="{% url 'index' %}">Back to form</a>
 </body>
