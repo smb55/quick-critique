@@ -17,7 +17,7 @@ def index(request):
             # Summarise with AI
             review_summary = summarise_reviews(reviews)
             
-            return render(request, 'review_buddy_app/result.html', {
+            return render(request, 'quick_critique_app/result.html', {
                 'title': title,
                 'place_details': place_details,
                 'review_summary': review_summary
@@ -25,4 +25,4 @@ def index(request):
 
     else:
         form = ReviewForm()
-    return render(request, 'review_buddy_app/index.html', {'form': form})
+    return render(request, 'quick_critique_app/index.html', {'form': form})
