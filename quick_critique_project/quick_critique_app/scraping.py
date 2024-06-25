@@ -3,7 +3,7 @@ import json
 import serpapi
 from .creds import gmaps_api_key, serp_api_key
 
-def get_google_places_data(gmaps_api_key, restaurant_name, city_name):
+def get_google_places_data(restaurant_name, city_name):
     url = 'https://places.googleapis.com/v1/places:searchText'
     headers = {
         'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ def get_google_places_data(gmaps_api_key, restaurant_name, city_name):
     data = {
         'textQuery': f'{restaurant_name} in {city_name}'
     }
-
+    print("Searching Google for the place_id.")
     response = requests.post(url, headers=headers, data=json.dumps(data))
     return response.json()
 
@@ -46,20 +46,13 @@ def extract_relevant_fields(reviews):
 
     return concise_reviews
 
-def get_reviews(restaurant_name, city_name):
-    
-    places_data = get_google_places_data(gmaps_api_key, restaurant_name, city_name)
-    place_details, place_id = extract_place_details(places_data)
-
-    if not place_id:
-        return [], None
-    
+def get_reviews(place_id):
     params = {
-    "api_key": serp_api_key,
-    "engine": "google_maps_reviews",
-    "hl": "en",
-    "place_id": place_id,
-    "sort_by": "newestFirst"
+        "api_key": serp_api_key,
+        "engine": "google_maps_reviews",
+        "hl": "en",
+        "place_id": place_id,
+        "sort_by": "newestFirst"
     }
 
     reviews = []
@@ -76,7 +69,5 @@ def get_reviews(restaurant_name, city_name):
         else:
             # No more pages, break out of the loop
             break  
-    #print(reviews)
     concise_reviews = extract_relevant_fields(reviews)
-    #print(json.dumps(concise_reviews, indent=2))
-    return place_details, concise_reviews
+    return concise_reviews

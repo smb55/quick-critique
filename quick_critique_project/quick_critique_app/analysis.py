@@ -25,13 +25,13 @@ def get_gpt4_response(context):
 
 
 def summarise_reviews(reviews):
+    print("Sending reviews to AI API.")
     context = initialise_context()
     reviews_text = str(reviews)
     add_user_message(
         context, f"Summarise the following restaurant reviews: {reviews_text}"
     )
     summary = get_gpt4_response(context)
-    #print(summary)
     # Split the response into sections based on the * delimiter in the AI response
     sections = ["Food", "Service", "Atmosphere", "Price", "Trend", "Summary"]
     response_sections = {section: "" for section in sections}

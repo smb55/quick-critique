@@ -7,6 +7,11 @@ su-exec "$USER" python manage.py collectstatic --noinput
 USER_EXISTS="from django.contrib.auth import get_user_model; User = get_user_model(); exit(User.objects.exists())"
 su-exec "$USER" python manage.py shell -c "$USER_EXISTS" && su-exec "$USER" python manage.py createsuperuser --noinput
 
+# Apply database migrations
+echo "Apply database migrations"
+python manage.py makemigrations
+python manage.py migrate
+
 if [ "$1" = "--debug" ]; then
   # Django development server
   exec su-exec "$USER" python manage.py runserver "0.0.0.0:$DJANGO_DEV_SERVER_PORT"
