@@ -2,37 +2,89 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Review Summary</title>
+    <title>Quick Critic - Summary of Reviews for {{ title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+            margin-top: 20px;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            width: 90%;
+            max-width: 600px;
+        }
+        .summary-section {
+            margin-bottom: 20px;
+        }
+        .back-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Review Summary</h1>
-    
-    <!-- Display the place details -->
-    <h2>Place Details</h2>
-    <p><strong>Name:</strong> {{ place_details.displayName }}</p>
-    <p><strong>Rating:</strong> {{ place_details.rating }}</p>
-    <p><strong>User Rating Count:</strong> {{ place_details.userRatingCount }}</p>
+    <h1>Quick Critic - Summary of Reviews for {{ title }}</h1>
+    <div class="container">
+        <div class="summary-section">
+            <p><strong>Overall Rating:</strong> {{ place_details.rating }}</p>
+            <p><strong>Total Reviews:</strong> {{ place_details.userRatingCount }}</p>
+        </div>
 
-    <!-- Display the review summary sections -->
-    <h2>Food</h2>
-    <p>{{ review_summary.Food }}</p>
+        <!-- Display the review summary sections -->
+        <div class="summary-section">
+            <h2>Food</h2>
+            <p>{{ review_summary.Food }}</p>
+        </div>
 
-    <h2>Service</h2>
-    <p>{{ review_summary.Service }}</p>
+        <div class="summary-section">
+            <h2>Service</h2>
+            <p>{{ review_summary.Service }}</p>
+        </div>
 
-    <h2>Atmosphere</h2>
-    <p>{{ review_summary.Atmosphere }}</p>
+        <div class="summary-section">
+            <h2>Atmosphere</h2>
+            <p>{{ review_summary.Atmosphere }}</p>
+        </div>
 
-    <h2>Price</h2>
-    <p>{{ review_summary.Price }}</p>
+        <div class="summary-section">
+            <h2>Price</h2>
+            <p>{{ review_summary.Price }}</p>
+        </div>
 
-    <h2>Trend</h2>
-    <p>{{ review_summary.Trend }}</p>
+        <div class="summary-section">
+            <h2>Trend</h2>
+            <p>{{ review_summary.Trend }}</p>
+        </div>
 
-    <h2>Summary</h2>
-    <p>{{ review_summary.Summary }}</p>
+        <div class="summary-section">
+            <h2>Summary</h2>
+            <p>{{ review_summary.Summary }}</p>
+        </div>
 
-    <!-- Link to go back to the form -->
-    <a href="{% url 'index' %}">Back to form</a>
+        <a href="{% url 'index' %}" class="back-button">New Search</a>
+    </div>
 </body>
 </html>

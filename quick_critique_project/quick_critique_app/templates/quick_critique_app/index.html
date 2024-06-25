@@ -1,15 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Restaurant Review Aggregator</title>
+    <title>Quick Critic - AI-Powered Summary of Restaurant Reviews</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #343a40;
+        }
+        .instructions {
+            margin-bottom: 20px;
+            color: #6c757d;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            max-width: 300px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Enter Restaurant and City</h1>
-    <form method="post">
-        <!-- Include the CSRF token for security -->
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
+    <div class="container">
+        <h1>Quick Critic - AI-Powered Summary of Restaurant Reviews</h1>
+        <div class="instructions">
+            <p>Enter the name of the restaurant and the city it is located in to get a summary of the latest (approx 80) reviews.</p>
+        </div>
+        <form method="post">
+            <!-- Include the CSRF token for security -->
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+            <div class="message">Please click once and wait, results may take up to a minute to appear.</div>
+        </form>
+    </div>
 </body>
 </html>

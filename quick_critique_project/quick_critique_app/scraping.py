@@ -64,7 +64,7 @@ def get_reviews(restaurant_name, city_name):
 
     reviews = []
     # Loop through the first 5 pages
-    for _ in range(5):  
+    for _ in range(4):  
         search = serpapi.search(params)
         results = search.as_dict()
         reviews.extend(results.get("reviews", []))

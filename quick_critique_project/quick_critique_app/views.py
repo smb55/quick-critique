@@ -12,7 +12,7 @@ def index(request):
 
             # Get place details and reviews
             place_details, reviews = get_reviews(restaurant_name, city_name)
-            title = f"Summary for {restaurant_name} in {city_name}"
+            title = place_details.get('displayName', f"{restaurant_name} in {city_name}")
             
             # Summarise with AI
             review_summary = summarise_reviews(reviews)
