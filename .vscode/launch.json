@@ -8,8 +8,8 @@
       "python": {
         "pathMappings": [
           {
-            "localRoot": "${workspaceFolder}/website/",
-            "remoteRoot": "/usr/src/website/"
+            "localRoot": "${workspaceFolder}/quick_critique_project/",
+            "remoteRoot": "/usr/src/quick_critique_project/"
           }
         ],
         "projectType": "django"

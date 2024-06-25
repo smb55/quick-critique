@@ -27,6 +27,7 @@ def extract_place_details(response_data):
             'userRatingCount': place.get('userRatingCount', ''),
         }
         place_id = response_data['places'][0]['id']
+        print(place_id)
         return place_details, place_id
     return None, None
 
