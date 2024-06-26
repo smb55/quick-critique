@@ -20,7 +20,7 @@ def add_user_message(context, message):
 
 
 def get_gpt4_response(context):
-    response = client.chat.completions.create(model="gpt-4", messages=context)
+    response = client.chat.completions.create(model="gpt-4o", messages=context)
     return response.choices[0].message.content
 
 
