@@ -26,8 +26,8 @@ jobs:
 
       - name: Test and submit coverage report
         run: |
-          docker build -t django-docker-template:master .
-          docker run --rm -v $(pwd)/quick_critique_project/:/usr/src/quick_critique_project django-docker-template:master ./pytest.sh
+          docker build -t quick-critique:master .
+          docker run --rm -v $(pwd)/quick_critique_project/:/usr/src/quick_critique_project quick-critique:master ./pytest.sh
           pip install coveralls
           cd quick_critique_project && coveralls --service=github
         env:
