@@ -14,7 +14,7 @@ def get_google_places_data(restaurant_name, city_name):
         'textQuery': f'{restaurant_name} in {city_name}'
     }
     print("Searching Google for the place_id.")
-    response = requests.post(url, headers=headers, data=json.dumps(data))
+    response = requests.post(url, headers=headers, data=json.dumps(data), timeout=60)
     return response.json()
 
 def extract_place_details(response_data):
