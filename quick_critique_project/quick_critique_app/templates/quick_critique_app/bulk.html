@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bulk Review Upload</title>
+</head>
+<body>
+    <h1>Upload Bulk Reviews</h1>
+    <form action="{% url 'bulk_reviews' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="bulk_file">Select a text file. Format should be city on first line, restaurant names subsequent newlines:</label>
+        <input type="file" id="bulk_file" name="bulk_file" accept=".txt">
+        <button type="submit">Upload</button>
+    </form>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>
