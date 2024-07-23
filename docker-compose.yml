@@ -65,9 +65,11 @@ services:
       - "--certificatesresolvers.le-resolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.le-resolver.acme.email=admin@quickcritic.online"
       - "--certificatesresolvers.le-resolver.acme.storage=/letsencrypt/acme.json"
+      - "--api.dashboard=true"
     ports:
       - "80:80"
       - "443:443"
+      - "8080:8080"
     volumes:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
