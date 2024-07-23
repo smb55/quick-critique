@@ -47,9 +47,10 @@ services:
       - django
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.staticfiles.rule=PathPrefix(`/static/`) || PathPrefix(`/media/`)"
-      - "traefik.http.routers.staticfiles.entrypoints=web"
-      - "traefik.http.routers.staticfiles.priority=2"
+      - "traefik.http.routers.staticfiles.rule=Host(`quickcritic.online`) && (PathPrefix(`/static`) || PathPrefix(`/media`))"
+      - "traefik.http.routers.staticfiles.entrypoints=websecure"
+      - "traefik.http.routers.staticfiles.tls.certresolver=le-resolver"
+      - "traefik.http.services.nginx.loadbalancer.server.port=80"
 
   reverse-proxy:
     image: traefik:v2.9
