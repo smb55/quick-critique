@@ -80,8 +80,8 @@ celery:
       - django
       - redis
 
-  redis:
-    image: redis:latest
+redis:
+  image: redis:latest
 
 volumes:
   postgres-data:
