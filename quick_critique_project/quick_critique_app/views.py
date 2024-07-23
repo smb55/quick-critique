@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import ReviewForm, BulkReviewForm
 from .scraping import generate_review_data
+from .tasks import process_bulk_reviews
 
 def index(request):
     if request.method == 'POST':
@@ -37,17 +38,10 @@ def bulk_reviews(request):
             city_name = bulk_file.readline().strip().decode('utf-8')
             restaurant_names = [line.strip().decode('utf-8') for line in bulk_file.readlines()]
 
-            results = []
-            for restaurant_name in restaurant_names:
-                try:
-                    print("Processing:", restaurant_name)
-                    generate_review_data(restaurant_name, city_name)
-                    results.append(f"{restaurant_name} processed successfully.")
-                except Exception as e:
-                    print(f"Error processing {restaurant_name}: {e}")
-                    results.append(f"Error processing {restaurant_name}: {e}")
+            # Trigger the Celery task
+            process_bulk_reviews.delay(city_name, restaurant_names)
 
-            return render(request, 'quick_critique_app/bulk.html', {'form': form, 'message': 'Bulk reviews processed.', 'results': results})
+            return render(request, 'quick_critique_app/bulk.html', {'form': form, 'message': 'Bulk reviews processing started. You will be notified upon completion.'})
     else:
         form = BulkReviewForm()
     return render(request, 'quick_critique_app/bulk.html', {'form': form})

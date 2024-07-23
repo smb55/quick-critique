@@ -71,6 +71,18 @@ services:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
+celery:
+    build: .
+    command: celery -A quick_critique_project worker --loglevel=info
+    volumes:
+      - .:/code
+    depends_on:
+      - django
+      - redis
+
+  redis:
+    image: redis:latest
+
 volumes:
   postgres-data:
   staticfiles-data:
