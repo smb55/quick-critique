@@ -22,7 +22,9 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.django.rule=Host(`quickcritic.online`)"
       - "traefik.http.routers.django.entrypoints=web"
-      - "traefik.http.routers.django.priority=1"
+      - "traefik.http.routers.django.entrypoints=websecure"
+      - "traefik.http.routers.django.tls.certresolver=le-resolver"
+      - "traefik.http.services.django.loadbalancer.server.port=8000"
 
   nginx:
     image: nginx:1.23-alpine
