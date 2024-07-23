@@ -45,10 +45,7 @@ services:
     depends_on:
       - django
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.nginx.rule=Host(`quickcritic.online`)"
-      - "traefik.http.routers.nginx.entrypoints=web"
-      - "traefik.http.routers.nginx.priority=2"
+      - "traefik.enable=false"
 
   reverse-proxy:
     image: traefik:v2.9
@@ -65,11 +62,9 @@ services:
       - "--certificatesresolvers.le-resolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.le-resolver.acme.email=admin@quickcritic.online"
       - "--certificatesresolvers.le-resolver.acme.storage=/letsencrypt/acme.json"
-      - "--api.dashboard=true"
     ports:
       - "80:80"
       - "443:443"
-      - "8080:8080"
     volumes:
       - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
