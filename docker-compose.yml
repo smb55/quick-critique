@@ -1,4 +1,3 @@
-version: '3.9'
 services:
   postgres:
     image: postgres:15
@@ -47,7 +46,10 @@ services:
     depends_on:
       - django
     labels:
-      - "traefik.enable=false"
+      - "traefik.enable=true"
+      - "traefik.http.routers.staticfiles.rule=PathPrefix(`/static/`) || PathPrefix(`/media/`)"
+      - "traefik.http.routers.staticfiles.entrypoints=web"
+      - "traefik.http.routers.staticfiles.priority=2"
 
   reverse-proxy:
     image: traefik:v2.9
