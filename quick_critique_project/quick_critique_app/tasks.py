@@ -1,6 +1,7 @@
 from celery import shared_task
 from .scraping import generate_review_data
 
+
 @shared_task
 def process_bulk_reviews(city_name, restaurant_names):
     results = []

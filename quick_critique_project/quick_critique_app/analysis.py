@@ -35,13 +35,13 @@ def summarise_reviews(reviews):
     # Split the response into sections based on the * delimiter in the AI response
     sections = ["Food", "Service", "Atmosphere", "Price", "Trend", "Summary"]
     response_sections = {section: "" for section in sections}
-    
+
     parts = summary.split("*")
     del parts[0]
     for part in parts:
         for section in sections:
             if part.startswith(f"{section}:"):
                 # Need to strip out the heading text here
-                response_sections[section] = part[len(section) + 1:].strip()
+                response_sections[section] = part[len(section) + 1 :].strip()
                 break
     return response_sections
