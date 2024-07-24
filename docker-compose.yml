@@ -76,6 +76,8 @@ services:
 
   celery:
     build: .
+    image: django-docker
+    env_file: .env
     command: celery -A quick_critique_project worker --loglevel=info
     volumes:
       - .:/code
