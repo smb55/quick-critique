@@ -88,7 +88,9 @@ def generate_review_data(restaurant_name: str, city_name: str):
     if place_id:
         # Check if the restaurant is already in the database by place_id
         try:
+            print("Checking database for", place_id)
             restaurant = Restaurant.objects.get(place_id=place_id)
+            print("Found object.")
             # Check if the summary is up-to-date (e.g., within the last 28 days)
             if ReviewSummary.objects.filter(
                 restaurant=restaurant,
