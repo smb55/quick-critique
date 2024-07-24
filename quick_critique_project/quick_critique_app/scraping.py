@@ -110,6 +110,12 @@ def generate_review_data(restaurant_name: str, city_name: str):
         except Restaurant.DoesNotExist:
             # If not in the database, fetch the details and save them
             print("Not found in database, pulling fresh reviews.")
+            print("Current DB:")
+            # Print all place_ids in the database for debugging
+            all_restaurants = Restaurant.objects.all()
+            for r in all_restaurants:
+                print("Existing place_id:", r.place_id)
+                
             reviews = get_reviews(place_id)
             restaurant, created = Restaurant.objects.get_or_create(
                 place_id=place_id,
